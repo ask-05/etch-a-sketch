@@ -32,9 +32,10 @@ mainContainer.appendChild(numberTiles);
 mainContainer.appendChild(numberTilesButton);
 mainContainer.appendChild(canvasContainer);
 
-addTiles(64, 800); 
+addTiles(8, 800); 
 function addTiles(n, canvasSize) { // canvasSize is a future feature to change the size of the canvas. 800x800 for now.
     const fragment = document.createDocumentFragment();
+    n = n*n;
 
     for (let index = 0; index < (n); index++) { // creating all the tiles.
         let tile = document.createElement("div");
