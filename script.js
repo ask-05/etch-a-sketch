@@ -10,26 +10,32 @@ function addCSSRule(selector, rules) {
         styleSheet.addRule(selector, rules, -1);
     }
 }
-
-// MAIN CSS RULES
-addCSSRule("body", `
-    justify-content: center;`)
+const mainContainer = document.createElement("div");
+mainContainer.setAttribute("class", "main-container"); // main container for everything
 
 const numberTiles = document.createElement("input");
 numberTiles.setAttribute("type", "text") // text box for number of tiles.
 
 const numberTilesButton = document.createElement("button");
-numberTilesButton.textContent = "Create my canvas!"; 
+numberTilesButton.textContent = "Create my canvas!"; // actual button to make canvas
 
 const canvasContainer = document.createElement("div");
 canvasContainer.setAttribute("class", "canvas-container"); // main container for tiles.
 
-body.appendChild(numberTiles);
-body.appendChild(numberTilesButton);
-body.appendChild(canvasContainer);
+const mainText = document.createElement("h1");
+mainText.textContent = "Etch-a-Sketch";
+mainText.style.fontSize = "50px";
+
+body.appendChild(mainContainer)
+mainContainer.appendChild(mainText);
+mainContainer.appendChild(numberTiles);
+mainContainer.appendChild(numberTilesButton);
+mainContainer.appendChild(canvasContainer);
 
 addTiles(64, 800); 
 function addTiles(n, canvasSize) { // canvasSize is a future feature to change the size of the canvas. 800x800 for now.
+    const fragment = document.createDocumentFragment();
+
     for (let index = 0; index < (n); index++) { // creating all the tiles.
         let tile = document.createElement("div");
         tile.setAttribute("class", "tile-" + index);
@@ -37,12 +43,14 @@ function addTiles(n, canvasSize) { // canvasSize is a future feature to change t
         tile.addEventListener("mouseover", () => {
             tile.style.backgroundColor = "black";
         });
-        canvasContainer.appendChild(tile);
+        fragment.appendChild(tile);
     }
+    canvasContainer.appendChild(fragment);
 
     styleSheet.deleteRule(".canvas-container"); // to delete previous setup.
     styleSheet.deleteRule("#tile");
     
+
     addCSSRule(".canvas-container", `
                 display:flex;
                 height: 800px;
@@ -53,7 +61,7 @@ function addTiles(n, canvasSize) { // canvasSize is a future feature to change t
                 width: ` + (800/Math.sqrt(n)) + `px;
                 height: ` + (800/Math.sqrt(n)) + `px;
                 box-sizing: border-box;
-                background-color: #909090;`);
+                background-color: white;`);
     
 }
 
