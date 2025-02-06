@@ -32,6 +32,15 @@ mainContainer.appendChild(numberTiles);
 mainContainer.appendChild(numberTilesButton);
 mainContainer.appendChild(canvasContainer);
 
+function getRandomColor() { // random color for tiles
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 addTiles(8, 800); 
 function addTiles(n, canvasSize) { // canvasSize is a future feature to change the size of the canvas. 800x800 for now.
     const fragment = document.createDocumentFragment();
@@ -42,7 +51,7 @@ function addTiles(n, canvasSize) { // canvasSize is a future feature to change t
         tile.setAttribute("class", "tile-" + index);
         tile.setAttribute("id", "tile");
         tile.addEventListener("mouseover", () => {
-            tile.style.backgroundColor = "black";
+            tile.style.backgroundColor = getRandomColor();
         });
         fragment.appendChild(tile);
     }
